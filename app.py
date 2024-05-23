@@ -29,5 +29,5 @@ def show_post(post_id):
 
 
 @app.route('/login')
-def login():
+def base():
     return f"Login"
