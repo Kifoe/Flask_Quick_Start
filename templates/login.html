@@ -1,0 +1,10 @@
+{% extends 'home.html' %}
+{% block content %}
+<form>
+ Username:<br>
+  <input type='text' name='username'><br>
+ Password:<br>
+  <input type='password' name='lastname'>
+</form>
+<a href="{{ url_for('home') }}">Back to title</a>
+{% endblock %}
