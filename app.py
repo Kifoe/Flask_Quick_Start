@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return render_template('home.html')
+    return render_template('_base.html')
 
 
 @app.route("/posts")
@@ -37,6 +37,13 @@ def login():
             return redirect(url_for('hello_user', username=request.form['username']))
 
     return render_template('login.html')
+
+
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+
+    return redirect(url_for('home'))
 
 
 @app.route('/register', methods=['GET',  'POST'])
