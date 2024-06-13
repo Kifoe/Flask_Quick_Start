@@ -1,11 +1,16 @@
-from flask import render_template, redirect, url_for, session
+from flask import render_template, redirect, url_for, session, flash
 from flask import Flask, request
 app = Flask(__name__)
 
 
 @app.route("/")
 def home():
-    return render_template('_base.html')
+    return render_template('home.html')
+
+
+@app.route("/pisos")
+def pisos():
+    return render_template('hello_world.html')
 
 
 @app.route("/posts")
@@ -34,6 +39,7 @@ def login():
         password = request.form['password']
         if username in user_database and user_database[username] == password:
             session['username'] = username
+            flash("You successfuly logged")
             return redirect(url_for('hello_user', username=request.form['username']))
 
     return render_template('login.html')
@@ -42,7 +48,6 @@ def login():
 @app.route('/logout')
 def logout():
     session.pop('username', None)
-
     return redirect(url_for('home'))
 
 

@@ -1,14 +1,22 @@
 {% extends 'home.html' %}
 {% block content %}
-<form method='post'>
- <h1>Login</h1>
- <label for="username">Username:</label><br>
-  <input id = 'username' type='text' name='username' required><br>
+<main class="form-signin w-100 m-auto">
+  <form method="post">
+   <img class="mb-4" src="{{ url_for('static', filename='assets/images/login-svgrepo-com.svg') }}" alt="" width="275" height="57">
+    <h1 class="h3 mb-3 fw-normal">Please Log in</h1>
 
- <label for="password">Password:</label><br>
-  <input id = 'password' type='password' name='password' required><br>
+    <div class="form-floating">
+      <input type="text" name="username" class="form-control" id="username" required>
+      <label for="username">Username</label><br>
+    </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" id="password" name="password" required>
+      <label for="password">Password</label>
+    </div>
 
- <button type='submit'>Submit</button>
-</form>
+    <button class="btn btn-primary w-100 py-2" type="submit">Log in</button>
+    <p class="mt-5 mb-3 text-body-secondary">&copy; 2024</p>
+  </form>
+ </main>
 <a href="{{ url_for('home') }}">Back to title</a>
 {% endblock %}
