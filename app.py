@@ -23,7 +23,7 @@ def posts():
 
 user_database = {
     "vasyl": "123456",
-    "arsen": "123",
+    "kifoe": "123",
     "oleksandr": "1234"
 }
 
@@ -53,10 +53,7 @@ def login():
 def register():
     form = RegistrationForm(request.form)
     if request.method == 'POST' and form.validate():
-        user = User(form.username.data, form.email.data,
-                    form.password.data)
-        db_session.add(user)
-        flash('Thanks for registering')
+        flash('Thanks for register')
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
 
