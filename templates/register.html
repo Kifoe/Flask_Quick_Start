@@ -2,10 +2,28 @@
 {% block content %}
 <main class="form-signin w-100 m-auto">
   <form method="post">
+    <img class="mb-4" src="{{ url_for('static', filename='assets/images/login-svgrepo-com.svg') }}" alt="" width="275" height="57">
     <h1 class="h3 mb-3 fw-normal">Sign up</h1>
 
+      <div class="form-floating">
+      <input type="text" name="first_name" class="form-control" id="first_name" required>
+      <label for="first_name">Username</label><br>
+      {% for error in form.username.errors %}
+      <div class="alert alert-danger">
+        {{ error }}
+      </div>
+        {% endfor %}
+      <div class="form-floating">
+      <input type="text" name="last_name" class="form-control" id="Last_name" >
+      <label for="last_name">Username</label><br>
+      {% for error in form.username.errors %}
+      <div class="alert alert-danger">
+        {{ error }}
+      </div>
+        {% endfor %}
+
     <div class="form-floating">
-      <input type="text" name="username" class="form-control" id="username" required>
+      <input type="text" name="username" class="form-control" id="username" >
       <label for="username">Username</label><br>
       {% for error in form.username.errors %}
       <div class="alert alert-danger">
@@ -13,7 +31,7 @@
       </div>
       {% endfor %}
     <div class="form-floating">
-      <input type="password" class="form-control" id="password" name="password" required>
+      <input type="password" class="form-control" id="password" name="password" >
       <label for="password">Password</label>
       {% for error in form.password.errors %}
       <div class="alert alert-danger">
