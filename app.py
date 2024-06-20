@@ -60,8 +60,7 @@ def register():
 
 @app.route("/user/<username>")
 def hello_user(username):
-    if 'username' in session and session['username'] == username:
-        return render_template('hello_user.html', username=username)
+    return render_template('hello_user.html', username=username)
 
 
 @app.route('/users')
