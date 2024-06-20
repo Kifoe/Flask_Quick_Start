@@ -1,5 +1,8 @@
 from flask import render_template, redirect, url_for, session, flash
 from flask import Flask, request
+
+from forms.login_form import LoginForm
+from forms.registration_form import RegistrationForm
 app = Flask(__name__)
 
 
@@ -34,7 +37,8 @@ def show_post(post_id):
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    if request.method == 'POST':
+    form = LoginForm(request.form)
+    if request.method == 'POST' and form.validate():
         username = request.form['username']
         password = request.form['password']
         if username in user_database and user_database[username] == password:
@@ -42,20 +46,25 @@ def login():
             flash("You successfuly logged")
             return redirect(url_for('hello_user', username=request.form['username']))
 
-    return render_template('login.html')
+    return render_template('login.html', form=form)
+
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    form = RegistrationForm(request.form)
+    if request.method == 'POST' and form.validate():
+        user = User(form.username.data, form.email.data,
+                    form.password.data)
+        db_session.add(user)
+        flash('Thanks for registering')
+        return redirect(url_for('login'))
+    return render_template('register.html', form=form)
 
 
 @app.route('/logout')
 def logout():
     session.pop('username', None)
     return redirect(url_for('home'))
-
-
-@app.route('/register', methods=['GET',  'POST'])
-def register():
-    if request.method == "POST":
-        return redirect(url_for('home'))
-    return render_template('register.html')
 
 
 @app.route("/user/<username>")
